@@ -7,43 +7,43 @@ using UglyTrivia;
 
 namespace Trivia
 {
-    public class GameRunner
-    {
+	public class GameRunner
+	{
 
-        private static bool notAWinner;
+		private static bool notAWinner;
 
-        public static void Main(String[] args)
-        {
-            Game aGame = new Game();
+		public static void Main(String[] args)
+		{
+			Game aGame = new Game();
 
-            aGame.add("Chet");
-            aGame.add("Pat");
-            aGame.add("Sue");
-
-            Random rand = new Random();
-
-            do
-            {
-
-                aGame.roll(rand.Next(5) + 1);
-
-                if (rand.Next(9) == 7)
-                {
-                    notAWinner = aGame.wrongAnswer();
-                }
-                else
-                {
-                    notAWinner = aGame.wasCorrectlyAnswered();
-                }
+			aGame.add("Chet");
+			aGame.add("Pat");
+			aGame.add("Sue");
 
 
+			int seed = DateTime.Now.Millisecond;
+			if (args.Length == 1)
+			{
+				seed = int.Parse(args[0]);
+			}
 
-            } while (notAWinner);
+			Random rand = new Random(seed);
 
-        }
+			do
+			{
+				aGame.roll(rand.Next(5) + 1);
 
+				if (rand.Next(9) == 7)
+				{
+					notAWinner = aGame.wrongAnswer();
+				}
+				else
+				{
+					notAWinner = aGame.wasCorrectlyAnswered();
+				}
+			} while (notAWinner);
 
-    }
-
+		}
+	}
 }
 
