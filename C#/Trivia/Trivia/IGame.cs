@@ -7,6 +7,7 @@ namespace Trivia
 		bool WrongAnswer();
 		bool IsPlayable();
 		bool AddPlayer(String playerName);
+		String CurrentCategory();
 
 		int PlayerCount
 		{

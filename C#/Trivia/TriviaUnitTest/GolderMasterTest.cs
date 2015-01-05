@@ -29,7 +29,7 @@ namespace TriviaUnitTest
 			}
 		}
 
-		[TestMethod]
+		//[TestMethod]
 		public void Test_Output_Once()
 		{
 			int seed = 1;
@@ -48,7 +48,7 @@ namespace TriviaUnitTest
 			Assert.AreEqual(this.ReadFileContent("tem1.txt"), this.ReadFileContent("GolderMaster_20.txt"));
 		}
 
-		[TestMethod]
+		//[TestMethod]
 		public void Test_FileOutput_Many()
 		{
 			this.GenerateManyToFile(20, "tem1.txt");

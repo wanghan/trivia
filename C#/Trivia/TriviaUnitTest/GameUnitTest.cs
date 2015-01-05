@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Trivia;
+using System.Collections.Generic;
 
 namespace TriviaUnitTest
 {
@@ -55,6 +56,78 @@ namespace TriviaUnitTest
 			((int[])privateGame.GetField("purses"))[0] = Game.NumberOfCoinsToWin;
 
 			Assert.IsFalse((bool)privateGame.Invoke("DidPlayerNotWin", null));
+		}
+
+		[TestMethod]
+		public void Test_APlayersNextPositionIsCorrectlyDeterminedWhenNoNewLapIsInvolved()
+		{
+			PrivateObject privateGame = new PrivateObject(this.game);
+			int currentPlayer = 0;
+			int currentPlace = 2;
+			int rollNumber = 1;
+
+			privateGame.SetField("currentPlayer", currentPlayer);
+			((bool[])privateGame.GetField("inPenaltyBox"))[currentPlayer] = false;
+			((int[])privateGame.GetField("places"))[currentPlayer] = currentPlace;
+			((List<string>)privateGame.GetField("players")).Add("Player1");
+
+			privateGame.Invoke("roll", new object[] { rollNumber });
+
+			Assert.AreEqual(3, ((int[])privateGame.GetField("places"))[currentPlayer], "Player1 is expected at position 3");
+			Assert.AreEqual("Rock", game.CurrentCategory());
+		}
+
+		[TestMethod]
+		public void Test_APlayerWillStartANewLapWhenNeeded()
+		{
+			PrivateObject privateGame = new PrivateObject(this.game);
+			int currentPlayer = 0;
+			int currentPlace = 11;
+			int rollNumber = 2;
+
+			privateGame.SetField("currentPlayer", currentPlayer);
+			((bool[])privateGame.GetField("inPenaltyBox"))[currentPlayer] = false;
+			((int[])privateGame.GetField("places"))[currentPlayer] = currentPlace;
+			((List<string>)privateGame.GetField("players")).Add("Player1");
+
+			privateGame.Invoke("roll", new object[] { rollNumber });
+
+			Assert.AreEqual(1, ((int[])privateGame.GetField("places"))[currentPlayer], "Player1 is expected at position 1");
+			Assert.AreEqual("Science", game.CurrentCategory());
+		}
+
+		[TestMethod]
+		public void Test_APlayerWhoIsPenalizedAndRollsAnIOddNumberWillGetOutOfThePenaltyBox()
+		{
+			PrivateObject privateGame = new PrivateObject(this.game);
+			int rollNumber = 3;
+
+			SetupPlayerInPenaltyBox(privateGame);
+
+			privateGame.Invoke("roll", new object[] { rollNumber });
+
+			Assert.IsTrue((bool)privateGame.GetField("isGettingOutOfPenaltyBox"));
+		}
+
+		[TestMethod]
+		public void Test_APlayerWhoIsPenalizedAndRollsAnEvenNumberWillStayInThePenaltyBox()
+		{
+			PrivateObject privateGame = new PrivateObject(this.game);
+			int rollNumber = 2;
+			SetupPlayerInPenaltyBox(privateGame);
+
+			privateGame.Invoke("roll", new object[] { rollNumber });
+
+			Assert.IsFalse((bool)privateGame.GetField("isGettingOutOfPenaltyBox"));
+		}
+
+		private static void SetupPlayerInPenaltyBox(PrivateObject privateGame)
+		{
+			int currentPlayer = 0;
+
+			privateGame.SetField("currentPlayer", currentPlayer);
+			((bool[])privateGame.GetField("inPenaltyBox"))[currentPlayer] = true;
+			((List<string>)privateGame.GetField("players")).Add("Player1");
 		}
 
 		private void AddEnoughPlayers()

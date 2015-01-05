@@ -68,45 +68,66 @@ namespace Trivia
 			}
 		}
 
-		public void roll(int roll)
+		public void roll(int rolledNumber)
 		{
 			Console.WriteLine(players[currentPlayer] + " is the current player");
-			Console.WriteLine("They have rolled a " + roll);
+			Console.WriteLine("They have rolled a " + rolledNumber);
 
 			if (inPenaltyBox[currentPlayer])
 			{
-				if (IsOdd(roll))
+				if (IsOdd(rolledNumber))
 				{
 					isGettingOutOfPenaltyBox = true;
 
-					Console.WriteLine(players[currentPlayer] + " is getting out of the penalty box");
-					places[currentPlayer] = places[currentPlayer] + roll;
-					if (IsCurrentPlayerShouldStartANewLap()) places[currentPlayer] = places[currentPlayer] - BoardSize;
+					ShowPlayerGettingOutOfPenaltyBox();
+					MovePlayer(rolledNumber);
 
-					Console.WriteLine(players[currentPlayer]
-							+ "'s new location is "
-							+ places[currentPlayer]);
-					Console.WriteLine("The category is " + currentCategory());
+					ShowPlayerNewLocaltion();
+					ShowCurrentCategory();
 					askQuestion();
 				}
 				else
 				{
-					Console.WriteLine(players[currentPlayer] + " is not getting out of the penalty box");
+					ShowPlayerStaysInPenaltyBox();
 					isGettingOutOfPenaltyBox = false;
 				}
-
 			}
 			else
 			{
-				places[currentPlayer] = places[currentPlayer] + roll;
-				if (IsCurrentPlayerShouldStartANewLap()) places[currentPlayer] = places[currentPlayer] - BoardSize;
+				MovePlayer(rolledNumber);
 
-				Console.WriteLine(players[currentPlayer]
-						+ "'s new location is "
-						+ places[currentPlayer]);
-				Console.WriteLine("The category is " + currentCategory());
+				ShowPlayerNewLocaltion();
+				ShowCurrentCategory();
 				askQuestion();
 			}
+		}
+
+		private void ShowPlayerStaysInPenaltyBox()
+		{
+			Console.WriteLine(players[currentPlayer] + " is not getting out of the penalty box");
+		}
+
+		private void ShowPlayerGettingOutOfPenaltyBox()
+		{
+			Console.WriteLine(players[currentPlayer] + " is getting out of the penalty box");
+		}
+
+		private void MovePlayer(int rolledNumber)
+		{
+			places[currentPlayer] = places[currentPlayer] + rolledNumber;
+			if (IsCurrentPlayerShouldStartANewLap()) places[currentPlayer] = places[currentPlayer] - BoardSize;
+		}
+
+		private void ShowPlayerNewLocaltion()
+		{
+			Console.WriteLine(players[currentPlayer]
+								   + "'s new location is "
+								   + places[currentPlayer]);
+		}
+
+		private void ShowCurrentCategory()
+		{
+			Console.WriteLine("The category is " + CurrentCategory());
 		}
 
 		private static bool IsOdd(int roll)
@@ -121,30 +142,29 @@ namespace Trivia
 
 		private void askQuestion()
 		{
-			if (currentCategory() == "Pop")
+			if (CurrentCategory() == "Pop")
 			{
 				Console.WriteLine(popQuestions.First());
 				popQuestions.RemoveFirst();
 			}
-			if (currentCategory() == "Science")
+			if (CurrentCategory() == "Science")
 			{
 				Console.WriteLine(scienceQuestions.First());
 				scienceQuestions.RemoveFirst();
 			}
-			if (currentCategory() == "Sports")
+			if (CurrentCategory() == "Sports")
 			{
 				Console.WriteLine(sportsQuestions.First());
 				sportsQuestions.RemoveFirst();
 			}
-			if (currentCategory() == "Rock")
+			if (CurrentCategory() == "Rock")
 			{
 				Console.WriteLine(rockQuestions.First());
 				rockQuestions.RemoveFirst();
 			}
 		}
 
-
-		private String currentCategory()
+		public String CurrentCategory()
 		{
 			if (places[currentPlayer] == 0) return "Pop";
 			if (places[currentPlayer] == 4) return "Pop";
