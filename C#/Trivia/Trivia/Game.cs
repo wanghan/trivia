@@ -22,31 +22,28 @@ namespace UglyTrivia
 		int currentPlayer = 0;
 		bool isGettingOutOfPenaltyBox;
 
+		private const int CategorySize = 50;
+		private const int MinPlayerCount = 2;
+		private const int BoardSize = 12;
+
 		public Game()
 		{
-			for (int i = 0; i < 50; i++)
+			for (int i = 0; i < CategorySize; i++)
 			{
 				popQuestions.AddLast("Pop Question " + i);
 				scienceQuestions.AddLast(("Science Question " + i));
 				sportsQuestions.AddLast(("Sports Question " + i));
-				rockQuestions.AddLast(createRockQuestion(i));
+				rockQuestions.AddLast(("Rock Question " + i));
 			}
-		}
-
-		public String createRockQuestion(int index)
-		{
-			return "Rock Question " + index;
 		}
 
 		public bool isPlayable()
 		{
-			return (howManyPlayers() >= 2);
+			return (howManyPlayers() >= MinPlayerCount);
 		}
 
 		public bool add(String playerName)
 		{
-
-
 			players.Add(playerName);
 			places[howManyPlayers()] = 0;
 			purses[howManyPlayers()] = 0;
@@ -69,13 +66,13 @@ namespace UglyTrivia
 
 			if (inPenaltyBox[currentPlayer])
 			{
-				if (roll % 2 != 0)
+				if (IsOdd(roll))
 				{
 					isGettingOutOfPenaltyBox = true;
 
 					Console.WriteLine(players[currentPlayer] + " is getting out of the penalty box");
 					places[currentPlayer] = places[currentPlayer] + roll;
-					if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
+					if (IsCurrentPlayerShouldStartANewLap()) places[currentPlayer] = places[currentPlayer] - BoardSize;
 
 					Console.WriteLine(players[currentPlayer]
 							+ "'s new location is "
@@ -92,9 +89,8 @@ namespace UglyTrivia
 			}
 			else
 			{
-
 				places[currentPlayer] = places[currentPlayer] + roll;
-				if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
+				if (IsCurrentPlayerShouldStartANewLap()) places[currentPlayer] = places[currentPlayer] - BoardSize;
 
 				Console.WriteLine(players[currentPlayer]
 						+ "'s new location is "
@@ -102,7 +98,16 @@ namespace UglyTrivia
 				Console.WriteLine("The category is " + currentCategory());
 				askQuestion();
 			}
+		}
 
+		private static bool IsOdd(int roll)
+		{
+			return roll % 2 != 0;
+		}
+
+		private bool IsCurrentPlayerShouldStartANewLap()
+		{
+			return places[currentPlayer] > BoardSize - 1;
 		}
 
 		private void askQuestion()
@@ -158,24 +163,18 @@ namespace UglyTrivia
 							+ " Gold Coins.");
 
 					bool winner = didPlayerWin();
-					currentPlayer++;
-					if (currentPlayer == players.Count) currentPlayer = 0;
+					MoveNextPlayer();
 
 					return winner;
 				}
 				else
 				{
-					currentPlayer++;
-					if (currentPlayer == players.Count) currentPlayer = 0;
+					MoveNextPlayer();
 					return true;
 				}
-
-
-
 			}
 			else
 			{
-
 				Console.WriteLine("Answer was corrent!!!!");
 				purses[currentPlayer]++;
 				Console.WriteLine(players[currentPlayer]
@@ -184,11 +183,16 @@ namespace UglyTrivia
 						+ " Gold Coins.");
 
 				bool winner = didPlayerWin();
-				currentPlayer++;
-				if (currentPlayer == players.Count) currentPlayer = 0;
+				MoveNextPlayer();
 
 				return winner;
 			}
+		}
+
+		private void MoveNextPlayer()
+		{
+			currentPlayer++;
+			if (currentPlayer == players.Count) currentPlayer = 0;
 		}
 
 		public bool wrongAnswer()
@@ -201,7 +205,6 @@ namespace UglyTrivia
 			if (currentPlayer == players.Count) currentPlayer = 0;
 			return true;
 		}
-
 
 		private bool didPlayerWin()
 		{

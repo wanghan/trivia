@@ -9,10 +9,24 @@ namespace Trivia
 {
 	public class GameRunner
 	{
+		public Random Rand
+		{
+			get;
+			private set;
+		}
 
-		private static bool notAWinner;
+		public const int WrongAnswerId = 7;
+		public const int MinAnswerId = 0;
+		public const int MaxAnswerId = 9;
 
-		public static void Main(String[] args)
+		private bool notAWinner;
+
+		public GameRunner(int seed)
+		{
+			this.Rand = new Random(seed);
+		}
+
+		public void Run()
 		{
 			Game aGame = new Game();
 
@@ -20,20 +34,12 @@ namespace Trivia
 			aGame.add("Pat");
 			aGame.add("Sue");
 
-
-			int seed = DateTime.Now.Millisecond;
-			if (args.Length == 1)
-			{
-				seed = int.Parse(args[0]);
-			}
-
-			Random rand = new Random(seed);
-
 			do
 			{
-				aGame.roll(rand.Next(5) + 1);
+				int dice = Rand.Next(5) + 1;
+				aGame.roll(dice);
 
-				if (rand.Next(9) == 7)
+				if (!IsCurrentAnswerCorrect())
 				{
 					notAWinner = aGame.wrongAnswer();
 				}
@@ -42,7 +48,19 @@ namespace Trivia
 					notAWinner = aGame.wasCorrectlyAnswered();
 				}
 			} while (notAWinner);
+		}
 
+		public bool IsCurrentAnswerCorrect(int minAnswerId = MinAnswerId, int maxAnswerId = MaxAnswerId)
+		{
+			return this.Rand.Next(minAnswerId, maxAnswerId) != WrongAnswerId;
+		}
+
+		public static void Main(String[] args)
+		{
+			int seed = DateTime.Now.Millisecond;
+
+			GameRunner runner = new GameRunner(seed);
+			runner.Run();
 		}
 	}
 }

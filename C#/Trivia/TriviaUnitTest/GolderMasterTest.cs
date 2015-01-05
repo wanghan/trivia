@@ -96,9 +96,10 @@ namespace TriviaUnitTest
 				StreamWriter sw = new StreamWriter(ms);
 				Console.SetOut(sw);
 
-				GameRunner.Main(new string[] { seed.ToString() });
-				sw.Flush();
+				GameRunner runner = new GameRunner(seed);
+				runner.Run();
 
+				sw.Flush();
 				ms.Seek(0, SeekOrigin.Begin);
 
 				StreamReader sr = new StreamReader(ms);
