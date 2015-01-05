@@ -47,6 +47,16 @@ namespace TriviaUnitTest
 			Assert.AreEqual(false, ((bool[])privateGame.GetField("inPenaltyBox"))[this.game.PlayerCount]);
 		}
 
+		[TestMethod]
+		public void Test_PlayerWinsWithTheCorrectNumberOfCoins()
+		{
+			PrivateObject privateGame = new PrivateObject(this.game);
+			privateGame.SetField("currentPlayer", 0);
+			((int[])privateGame.GetField("purses"))[0] = Game.NumberOfCoinsToWin;
+
+			Assert.IsFalse((bool)privateGame.Invoke("DidPlayerNotWin", null));
+		}
+
 		private void AddEnoughPlayers()
 		{
 			this.AddManyPlayers(this.game, Game.MinPlayerCount);
