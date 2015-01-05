@@ -8,6 +8,35 @@ namespace TriviaUnitTest
 	[TestClass]
 	public class GameRunnerUnitTest
 	{
+		private IGame FakeGame
+		{
+			get
+			{
+				return new Trivia.Fakes.StubIGame()
+				{
+					WasCorrectlyAnswered = () => { return false; },
+					WrongAnswer = () => { return true; }
+				};
+			}
+		}
+
+		private bool AWrongAnswer
+		{
+			get
+			{
+				return false;
+			}
+		}
+
+		private bool ACorrectAnswer
+		{
+			get
+			{
+				return true;
+			}
+		}
+
+
 		[TestMethod]
 		public void Test_IsCorrectAnswerId()
 		{
@@ -27,6 +56,20 @@ namespace TriviaUnitTest
 			GameRunner runner = new GameRunner(DateTime.Now.Millisecond);
 
 			Assert.IsFalse(runner.IsCurrentAnswerCorrect(GameRunner.WrongAnswerId, GameRunner.WrongAnswerId));
+		}
+
+		[TestMethod]
+		public void Test_ItCanTellIfThereIsNoWinnerWhenACorrectAnswerIsProvided()
+		{
+			GameRunner runner = new GameRunner(DateTime.Now.Millisecond);
+			Assert.IsTrue(runner.DidSomeoneWin(this.FakeGame, this.ACorrectAnswer));
+		}
+
+		[TestMethod]
+		public void Test_ItCanTellIfThereIsNoWinnerWhenAWrongAnswerIsProvided()
+		{
+			GameRunner runner = new GameRunner(DateTime.Now.Millisecond);
+			Assert.IsFalse(runner.DidSomeoneWin(this.FakeGame, this.AWrongAnswer));
 		}
 
 		private int[] GetCorrectAnswerIds()

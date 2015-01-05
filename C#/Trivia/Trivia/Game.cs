@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace UglyTrivia
+namespace Trivia
 {
-	public class Game
+	public class Game : Trivia.IGame
 	{
 		List<string> players = new List<string>();
 
@@ -149,7 +149,7 @@ namespace UglyTrivia
 			return "Rock";
 		}
 
-		public bool wasCorrectlyAnswered()
+		public bool WasCorrectlyAnswered()
 		{
 			if (inPenaltyBox[currentPlayer])
 			{
@@ -195,7 +195,7 @@ namespace UglyTrivia
 			if (currentPlayer == players.Count) currentPlayer = 0;
 		}
 
-		public bool wrongAnswer()
+		public bool WrongAnswer()
 		{
 			Console.WriteLine("Question was incorrectly answered");
 			Console.WriteLine(players[currentPlayer] + " was sent to the penalty box");

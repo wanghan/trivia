@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using UglyTrivia;
-
 namespace Trivia
 {
-	public class GameRunner
+	public class GameRunner : IGameRunner
 	{
 		public Random Rand
 		{
@@ -38,16 +36,19 @@ namespace Trivia
 			{
 				int dice = Rand.Next(5) + 1;
 				aGame.roll(dice);
+			} while (!this.DidSomeoneWin(aGame, this.IsCurrentAnswerCorrect()));
+		}
 
-				if (!IsCurrentAnswerCorrect())
-				{
-					notAWinner = aGame.wrongAnswer();
-				}
-				else
-				{
-					notAWinner = aGame.wasCorrectlyAnswered();
-				}
-			} while (notAWinner);
+		public bool DidSomeoneWin(IGame aGame, bool isCurrentAnswerCorrect)
+		{
+			if (!isCurrentAnswerCorrect)
+			{
+				return !aGame.WrongAnswer();
+			}
+			else
+			{
+				return !aGame.WasCorrectlyAnswered();
+			}
 		}
 
 		public bool IsCurrentAnswerCorrect(int minAnswerId = MinAnswerId, int maxAnswerId = MaxAnswerId)
