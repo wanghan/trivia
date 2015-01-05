@@ -36,7 +36,6 @@ namespace TriviaUnitTest
 			}
 		}
 
-
 		[TestMethod]
 		public void Test_IsCorrectAnswerId()
 		{

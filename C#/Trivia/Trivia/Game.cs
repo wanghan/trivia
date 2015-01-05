@@ -22,9 +22,9 @@ namespace Trivia
 		int currentPlayer = 0;
 		bool isGettingOutOfPenaltyBox;
 
-		private const int CategorySize = 50;
-		private const int MinPlayerCount = 2;
-		private const int BoardSize = 12;
+		public const int CategorySize = 50;
+		public const int MinPlayerCount = 2;
+		public const int BoardSize = 12;
 
 		public Game()
 		{
@@ -37,26 +37,29 @@ namespace Trivia
 			}
 		}
 
-		public bool isPlayable()
+		public bool IsPlayable()
 		{
-			return (howManyPlayers() >= MinPlayerCount);
+			return (PlayerCount >= MinPlayerCount);
 		}
 
-		public bool add(String playerName)
+		public bool AddPlayer(String playerName)
 		{
 			players.Add(playerName);
-			places[howManyPlayers()] = 0;
-			purses[howManyPlayers()] = 0;
-			inPenaltyBox[howManyPlayers()] = false;
+			places[PlayerCount] = 0;
+			purses[PlayerCount] = 0;
+			inPenaltyBox[PlayerCount] = false;
 
 			Console.WriteLine(playerName + " was added");
 			Console.WriteLine("They are player number " + players.Count);
 			return true;
 		}
 
-		public int howManyPlayers()
+		public int PlayerCount
 		{
-			return players.Count;
+			get
+			{
+				return players.Count;
+			}
 		}
 
 		public void roll(int roll)
