@@ -32,6 +32,21 @@ namespace TriviaUnitTest
 			Assert.IsTrue(game.IsPlayable());
 		}
 
+		[TestMethod]
+		public void Test_CanAddANewPlayer()
+		{
+			Assert.AreEqual(0, this.game.PlayerCount);
+
+			this.game.AddPlayer("player");
+
+			Assert.AreEqual(1, this.game.PlayerCount);
+
+			PrivateObject privateGame = new PrivateObject(this.game);
+			Assert.AreEqual(0, ((int[])privateGame.GetField("places"))[this.game.PlayerCount]);
+			Assert.AreEqual(0, ((int[])privateGame.GetField("purses"))[this.game.PlayerCount]);
+			Assert.AreEqual(false, ((bool[])privateGame.GetField("inPenaltyBox"))[this.game.PlayerCount]);
+		}
+
 		private void AddEnoughPlayers()
 		{
 			this.AddManyPlayers(this.game, Game.MinPlayerCount);

@@ -5,5 +5,12 @@ namespace Trivia
 	{
 		bool WasCorrectlyAnswered();
 		bool WrongAnswer();
+		bool IsPlayable();
+		bool AddPlayer(String playerName);
+
+		int PlayerCount
+		{
+			get;
+		}
 	}
 }

@@ -45,13 +45,18 @@ namespace Trivia
 		public bool AddPlayer(String playerName)
 		{
 			players.Add(playerName);
-			places[PlayerCount] = 0;
-			purses[PlayerCount] = 0;
-			inPenaltyBox[PlayerCount] = false;
+			SetDefaultPlayerParameterFor(this.PlayerCount);
 
 			Console.WriteLine(playerName + " was added");
 			Console.WriteLine("They are player number " + players.Count);
 			return true;
+		}
+
+		private void SetDefaultPlayerParameterFor(int playerId)
+		{
+			places[playerId] = 0;
+			purses[playerId] = 0;
+			inPenaltyBox[playerId] = false;
 		}
 
 		public int PlayerCount
