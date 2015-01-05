@@ -1,0 +1,236 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Trivia.Fakes</name>
+    </assembly>
+    <members>
+        <member name="T:Trivia.Fakes.ShimGame">
+            <summary>Shim type of Trivia.Game</summary>
+        </member>
+        <member name="M:Trivia.Fakes.ShimGame.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:Trivia.Fakes.ShimGame.#ctor(Trivia.Game)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:Trivia.Fakes.ShimGame.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:Trivia.Fakes.ShimGame.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:Trivia.Fakes.ShimGame.Bind(Trivia.IGame)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGame.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGame.Constructor">
+            <summary>Sets the shim of Game.Game()</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGame.IsCurrentPlayerShouldStartANewLap">
+            <summary>Sets the shim of Game.IsCurrentPlayerShouldStartANewLap()</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGame.IsOddInt32">
+            <summary>Sets the shim of Game.IsOdd(Int32 roll)</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGame.MoveNextPlayer">
+            <summary>Sets the shim of Game.MoveNextPlayer()</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGame.WasCorrectlyAnswered">
+            <summary>Sets the shim of Game.WasCorrectlyAnswered()</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGame.WrongAnswer">
+            <summary>Sets the shim of Game.WrongAnswer()</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGame.addString">
+            <summary>Sets the shim of Game.add(String playerName)</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGame.askQuestion">
+            <summary>Sets the shim of Game.askQuestion()</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGame.currentCategory">
+            <summary>Sets the shim of Game.currentCategory()</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGame.didPlayerWin">
+            <summary>Sets the shim of Game.didPlayerWin()</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGame.howManyPlayers">
+            <summary>Sets the shim of Game.howManyPlayers()</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGame.isPlayable">
+            <summary>Sets the shim of Game.isPlayable()</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGame.rollInt32">
+            <summary>Sets the shim of Game.roll(Int32 roll)</summary>
+        </member>
+        <member name="T:Trivia.Fakes.ShimGame.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGame.AllInstances.IsCurrentPlayerShouldStartANewLap">
+            <summary>Sets the shim of Game.IsCurrentPlayerShouldStartANewLap()</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGame.AllInstances.MoveNextPlayer">
+            <summary>Sets the shim of Game.MoveNextPlayer()</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGame.AllInstances.WasCorrectlyAnswered">
+            <summary>Sets the shim of Game.WasCorrectlyAnswered()</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGame.AllInstances.WrongAnswer">
+            <summary>Sets the shim of Game.WrongAnswer()</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGame.AllInstances.addString">
+            <summary>Sets the shim of Game.add(String playerName)</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGame.AllInstances.askQuestion">
+            <summary>Sets the shim of Game.askQuestion()</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGame.AllInstances.currentCategory">
+            <summary>Sets the shim of Game.currentCategory()</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGame.AllInstances.didPlayerWin">
+            <summary>Sets the shim of Game.didPlayerWin()</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGame.AllInstances.howManyPlayers">
+            <summary>Sets the shim of Game.howManyPlayers()</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGame.AllInstances.isPlayable">
+            <summary>Sets the shim of Game.isPlayable()</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGame.AllInstances.rollInt32">
+            <summary>Sets the shim of Game.roll(Int32 roll)</summary>
+        </member>
+        <member name="T:Trivia.Fakes.ShimGameRunner">
+            <summary>Shim type of Trivia.GameRunner</summary>
+        </member>
+        <member name="M:Trivia.Fakes.ShimGameRunner.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:Trivia.Fakes.ShimGameRunner.#ctor(Trivia.GameRunner)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:Trivia.Fakes.ShimGameRunner.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:Trivia.Fakes.ShimGameRunner.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:Trivia.Fakes.ShimGameRunner.Bind(Trivia.IGameRunner)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGameRunner.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGameRunner.ConstructorInt32">
+            <summary>Sets the shim of GameRunner.GameRunner(Int32 seed)</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGameRunner.DidSomeoneWinIGameBoolean">
+            <summary>Sets the shim of GameRunner.DidSomeoneWin(IGame aGame, Boolean isCurrentAnswerCorrect)</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGameRunner.IsCurrentAnswerCorrectInt32Int32">
+            <summary>Sets the shim of GameRunner.IsCurrentAnswerCorrect(Int32 minAnswerId, Int32 maxAnswerId)</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGameRunner.MainStringArray">
+            <summary>Sets the shim of GameRunner.Main(String[] args)</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGameRunner.RandGet">
+            <summary>Sets the shim of GameRunner.get_Rand()</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGameRunner.RandSetRandom">
+            <summary>Sets the shim of GameRunner.set_Rand(Random value)</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGameRunner.Run">
+            <summary>Sets the shim of GameRunner.Run()</summary>
+        </member>
+        <member name="T:Trivia.Fakes.ShimGameRunner.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGameRunner.AllInstances.DidSomeoneWinIGameBoolean">
+            <summary>Sets the shim of GameRunner.DidSomeoneWin(IGame aGame, Boolean isCurrentAnswerCorrect)</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGameRunner.AllInstances.IsCurrentAnswerCorrectInt32Int32">
+            <summary>Sets the shim of GameRunner.IsCurrentAnswerCorrect(Int32 minAnswerId, Int32 maxAnswerId)</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGameRunner.AllInstances.RandGet">
+            <summary>Sets the shim of GameRunner.get_Rand()</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGameRunner.AllInstances.RandSetRandom">
+            <summary>Sets the shim of GameRunner.set_Rand(Random value)</summary>
+        </member>
+        <member name="P:Trivia.Fakes.ShimGameRunner.AllInstances.Run">
+            <summary>Sets the shim of GameRunner.Run()</summary>
+        </member>
+        <member name="T:Trivia.Fakes.StubGame">
+            <summary>Stub type of Trivia.Game</summary>
+        </member>
+        <member name="M:Trivia.Fakes.StubGame.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:Trivia.Fakes.StubGame.InitializeStub">
+            <summary>Initializes a new instance of type StubGame</summary>
+        </member>
+        <member name="P:Trivia.Fakes.StubGame.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:Trivia.Fakes.StubGame.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:Trivia.Fakes.StubGame.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:Trivia.Fakes.StubGameRunner">
+            <summary>Stub type of Trivia.GameRunner</summary>
+        </member>
+        <member name="M:Trivia.Fakes.StubGameRunner.#ctor(System.Int32)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:Trivia.Fakes.StubGameRunner.InitializeStub">
+            <summary>Initializes a new instance of type StubGameRunner</summary>
+        </member>
+        <member name="P:Trivia.Fakes.StubGameRunner.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:Trivia.Fakes.StubGameRunner.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:Trivia.Fakes.StubGameRunner.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:Trivia.Fakes.StubIGame">
+            <summary>Stub type of Trivia.IGame</summary>
+        </member>
+        <member name="M:Trivia.Fakes.StubIGame.#ctor">
+            <summary>Initializes a new instance of type StubIGame</summary>
+        </member>
+        <member name="M:Trivia.Fakes.StubIGame.t::Trivia#IGame#WasCorrectlyAnswered">
+            <summary>Sets the stub of IGame.WasCorrectlyAnswered()</summary>
+        </member>
+        <member name="M:Trivia.Fakes.StubIGame.t::Trivia#IGame#WrongAnswer">
+            <summary>Sets the stub of IGame.WrongAnswer()</summary>
+        </member>
+        <member name="F:Trivia.Fakes.StubIGame.WasCorrectlyAnswered">
+            <summary>Sets the stub of IGame.WasCorrectlyAnswered()</summary>
+        </member>
+        <member name="F:Trivia.Fakes.StubIGame.WrongAnswer">
+            <summary>Sets the stub of IGame.WrongAnswer()</summary>
+        </member>
+        <member name="T:Trivia.Fakes.StubIGameRunner">
+            <summary>Stub type of Trivia.IGameRunner</summary>
+        </member>
+        <member name="M:Trivia.Fakes.StubIGameRunner.#ctor">
+            <summary>Initializes a new instance of type StubIGameRunner</summary>
+        </member>
+        <member name="F:Trivia.Fakes.StubIGameRunner.IsCurrentAnswerCorrectInt32Int32">
+            <summary>Sets the stub of IGameRunner.IsCurrentAnswerCorrect(Int32 minAnswerId, Int32 maxAnswerId)</summary>
+        </member>
+        <member name="F:Trivia.Fakes.StubIGameRunner.Run">
+            <summary>Sets the stub of IGameRunner.Run()</summary>
+        </member>
+        <member name="M:Trivia.Fakes.StubIGameRunner.t::Trivia#IGameRunner#IsCurrentAnswerCorrect(System.Int32,System.Int32)">
+            <summary>Sets the stub of IGameRunner.IsCurrentAnswerCorrect(Int32 minAnswerId, Int32 maxAnswerId)</summary>
+        </member>
+        <member name="M:Trivia.Fakes.StubIGameRunner.t::Trivia#IGameRunner#Run">
+            <summary>Sets the stub of IGameRunner.Run()</summary>
+        </member>
+    </members>
+</doc>

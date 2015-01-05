@@ -1,0 +1,2 @@
+D:\Github\trivia\C#\Trivia\TriviaUnitTest\Fakes\Trivia.fakes : warning : Cannot generate shim for Trivia.IGame: type is an interface.
+D:\Github\trivia\C#\Trivia\TriviaUnitTest\Fakes\Trivia.fakes : warning : Cannot generate shim for Trivia.IGameRunner: type is an interface.
