@@ -25,6 +25,7 @@ namespace Trivia
 		public const int CategorySize = 50;
 		public const int MinPlayerCount = 2;
 		public const int BoardSize = 12;
+		public const int NumberOfCoinsToWin = 6;
 
 		public Game()
 		{
@@ -170,7 +171,7 @@ namespace Trivia
 							+ purses[currentPlayer]
 							+ " Gold Coins.");
 
-					bool winner = didPlayerWin();
+					bool winner = DidPlayerNotWin();
 					MoveNextPlayer();
 
 					return winner;
@@ -190,7 +191,7 @@ namespace Trivia
 						+ purses[currentPlayer]
 						+ " Gold Coins.");
 
-				bool winner = didPlayerWin();
+				bool winner = DidPlayerNotWin();
 				MoveNextPlayer();
 
 				return winner;
@@ -214,10 +215,9 @@ namespace Trivia
 			return true;
 		}
 
-		private bool didPlayerWin()
+		private bool DidPlayerNotWin()
 		{
-			return !(purses[currentPlayer] == 6);
+			return !(purses[currentPlayer] == NumberOfCoinsToWin);
 		}
 	}
-
 }
