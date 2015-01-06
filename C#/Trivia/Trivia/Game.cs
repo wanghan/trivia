@@ -14,15 +14,9 @@ namespace Trivia
 
 		bool[] inPenaltyBox = new bool[6];
 
-		LinkedList<string> popQuestions = new LinkedList<string>();
-		LinkedList<string> scienceQuestions = new LinkedList<string>();
-		LinkedList<string> sportsQuestions = new LinkedList<string>();
-		LinkedList<string> rockQuestions = new LinkedList<string>();
-
 		int currentPlayer = 0;
 		bool isGettingOutOfPenaltyBox;
 
-		public const int CategorySize = 50;
 		public const int MinPlayerCount = 2;
 		public const int BoardSize = 12;
 		public const int NumberOfCoinsToWin = 6;
@@ -31,14 +25,6 @@ namespace Trivia
 
 		public Game()
 		{
-			for (int i = 0; i < CategorySize; i++)
-			{
-				popQuestions.AddLast("Pop Question " + i);
-				scienceQuestions.AddLast(("Science Question " + i));
-				sportsQuestions.AddLast(("Sports Question " + i));
-				rockQuestions.AddLast(("Rock Question " + i));
-			}
-
 			this.display = new Display();
 		}
 
@@ -87,7 +73,7 @@ namespace Trivia
 
 					this.display.ShowPlayerNewLocaltion(players[currentPlayer], places[currentPlayer]);
 					this.display.ShowCurrentCategory(this.CurrentCategory());
-					askQuestion();
+					this.display.AskQuestion(this.CurrentCategory());
 				}
 				else
 				{
@@ -101,7 +87,7 @@ namespace Trivia
 
 				this.display.ShowPlayerNewLocaltion(players[currentPlayer], places[currentPlayer]);
 				this.display.ShowCurrentCategory(this.CurrentCategory());
-				askQuestion();
+				this.display.AskQuestion(this.CurrentCategory());
 			}
 		}
 
@@ -119,30 +105,6 @@ namespace Trivia
 		private bool IsCurrentPlayerShouldStartANewLap()
 		{
 			return places[currentPlayer] > BoardSize - 1;
-		}
-
-		private void askQuestion()
-		{
-			if (CurrentCategory() == "Pop")
-			{
-				this.display.WriteLine(popQuestions.First());
-				popQuestions.RemoveFirst();
-			}
-			if (CurrentCategory() == "Science")
-			{
-				this.display.WriteLine(scienceQuestions.First());
-				scienceQuestions.RemoveFirst();
-			}
-			if (CurrentCategory() == "Sports")
-			{
-				this.display.WriteLine(sportsQuestions.First());
-				sportsQuestions.RemoveFirst();
-			}
-			if (CurrentCategory() == "Rock")
-			{
-				this.display.WriteLine(rockQuestions.First());
-				rockQuestions.RemoveFirst();
-			}
 		}
 
 		public String CurrentCategory()
@@ -165,12 +127,9 @@ namespace Trivia
 			{
 				if (isGettingOutOfPenaltyBox)
 				{
-					this.display.WriteLine("Answer was correct!!!!");
+					this.display.ShowCorrectAnswer();
 					purses[currentPlayer]++;
-					this.display.WriteLine(players[currentPlayer]
-							+ " now has "
-							+ purses[currentPlayer]
-							+ " Gold Coins.");
+					this.display.ShowPlayerCoins(players[currentPlayer], purses[currentPlayer]);
 
 					bool winner = DidPlayerNotWin();
 					MoveNextPlayer();
@@ -185,12 +144,9 @@ namespace Trivia
 			}
 			else
 			{
-				this.display.WriteLine("Answer was corrent!!!!");
+				this.display.ShowCorrectAnswer();
 				purses[currentPlayer]++;
-				this.display.WriteLine(players[currentPlayer]
-						+ " now has "
-						+ purses[currentPlayer]
-						+ " Gold Coins.");
+				this.display.ShowPlayerCoins(players[currentPlayer], purses[currentPlayer]);
 
 				bool winner = DidPlayerNotWin();
 				MoveNextPlayer();
@@ -207,8 +163,8 @@ namespace Trivia
 
 		public bool WrongAnswer()
 		{
-			this.display.WriteLine("Question was incorrectly answered");
-			this.display.WriteLine(players[currentPlayer] + " was sent to the penalty box");
+			this.display.ShowWrongAnswer();
+			this.display.ShowPlayerPenalty(players[currentPlayer]);
 			inPenaltyBox[currentPlayer] = true;
 
 			currentPlayer++;

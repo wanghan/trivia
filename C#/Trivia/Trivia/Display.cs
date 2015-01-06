@@ -7,9 +7,22 @@ namespace Trivia
 {
 	internal class Display
 	{
-		public void WriteLine(string value)
+		LinkedList<string> popQuestions = new LinkedList<string>();
+		LinkedList<string> scienceQuestions = new LinkedList<string>();
+		LinkedList<string> sportsQuestions = new LinkedList<string>();
+		LinkedList<string> rockQuestions = new LinkedList<string>();
+
+		public const int CategorySize = 50;
+
+		public Display()
 		{
-			Console.WriteLine(value);
+			for (int i = 0; i < CategorySize; i++)
+			{
+				popQuestions.AddLast("Pop Question " + i);
+				scienceQuestions.AddLast(("Science Question " + i));
+				sportsQuestions.AddLast(("Sports Question " + i));
+				rockQuestions.AddLast(("Rock Question " + i));
+			}
 		}
 
 		public void ShowAddPlayerInfo(String playerName, int playerCount)
@@ -48,5 +61,56 @@ namespace Trivia
 			this.WriteLine("The category is " + category);
 		}
 
+		public void ShowCorrectAnswer()
+		{
+			this.WriteLine("Answer was corrent!!!!");
+		}
+
+		public void ShowPlayerCoins(string playerName, int coins)
+		{
+			this.WriteLine(playerName
+				+ " now has "
+				+ coins
+				+ " Gold Coins.");
+		}
+
+		public void ShowPlayerPenalty(string playerName)
+		{
+			this.WriteLine(playerName + " was sent to the penalty box");
+		}
+
+		public void ShowWrongAnswer()
+		{
+			this.WriteLine("Question was incorrectly answered");
+		}
+
+		public void AskQuestion(string currentCategory)
+		{
+			if (currentCategory == "Pop")
+			{
+				this.WriteLine(popQuestions.First());
+				popQuestions.RemoveFirst();
+			}
+			if (currentCategory == "Science")
+			{
+				this.WriteLine(scienceQuestions.First());
+				scienceQuestions.RemoveFirst();
+			}
+			if (currentCategory == "Sports")
+			{
+				this.WriteLine(sportsQuestions.First());
+				sportsQuestions.RemoveFirst();
+			}
+			if (currentCategory == "Rock")
+			{
+				this.WriteLine(rockQuestions.First());
+				rockQuestions.RemoveFirst();
+			}
+		}
+
+		private void WriteLine(string value)
+		{
+			Console.WriteLine(value);
+		}
 	}
 }
