@@ -27,6 +27,8 @@ namespace Trivia
 		public const int BoardSize = 12;
 		public const int NumberOfCoinsToWin = 6;
 
+		private Display display;
+
 		public Game()
 		{
 			for (int i = 0; i < CategorySize; i++)
@@ -36,6 +38,8 @@ namespace Trivia
 				sportsQuestions.AddLast(("Sports Question " + i));
 				rockQuestions.AddLast(("Rock Question " + i));
 			}
+
+			this.display = new Display();
 		}
 
 		public bool IsPlayable()
@@ -48,10 +52,10 @@ namespace Trivia
 			players.Add(playerName);
 			SetDefaultPlayerParameterFor(this.PlayerCount);
 
-			Console.WriteLine(playerName + " was added");
-			Console.WriteLine("They are player number " + players.Count);
+			this.display.ShowAddPlayerInfo(playerName, players.Count);
 			return true;
 		}
+
 
 		private void SetDefaultPlayerParameterFor(int playerId)
 		{
@@ -70,8 +74,7 @@ namespace Trivia
 
 		public void roll(int rolledNumber)
 		{
-			Console.WriteLine(players[currentPlayer] + " is the current player");
-			Console.WriteLine("They have rolled a " + rolledNumber);
+			this.display.ShowStatusBeforeRoll(players[currentPlayer], rolledNumber);
 
 			if (inPenaltyBox[currentPlayer])
 			{
@@ -79,16 +82,16 @@ namespace Trivia
 				{
 					isGettingOutOfPenaltyBox = true;
 
-					ShowPlayerGettingOutOfPenaltyBox();
+					this.display.ShowPlayerGettingOutOfPenaltyBox(players[currentPlayer]);
 					MovePlayer(rolledNumber);
 
-					ShowPlayerNewLocaltion();
-					ShowCurrentCategory();
+					this.display.ShowPlayerNewLocaltion(players[currentPlayer], places[currentPlayer]);
+					this.display.ShowCurrentCategory(this.CurrentCategory());
 					askQuestion();
 				}
 				else
 				{
-					ShowPlayerStaysInPenaltyBox();
+					this.display.ShowPlayerStaysInPenaltyBox(players[currentPlayer]);
 					isGettingOutOfPenaltyBox = false;
 				}
 			}
@@ -96,38 +99,16 @@ namespace Trivia
 			{
 				MovePlayer(rolledNumber);
 
-				ShowPlayerNewLocaltion();
-				ShowCurrentCategory();
+				this.display.ShowPlayerNewLocaltion(players[currentPlayer], places[currentPlayer]);
+				this.display.ShowCurrentCategory(this.CurrentCategory());
 				askQuestion();
 			}
-		}
-
-		private void ShowPlayerStaysInPenaltyBox()
-		{
-			Console.WriteLine(players[currentPlayer] + " is not getting out of the penalty box");
-		}
-
-		private void ShowPlayerGettingOutOfPenaltyBox()
-		{
-			Console.WriteLine(players[currentPlayer] + " is getting out of the penalty box");
 		}
 
 		private void MovePlayer(int rolledNumber)
 		{
 			places[currentPlayer] = places[currentPlayer] + rolledNumber;
 			if (IsCurrentPlayerShouldStartANewLap()) places[currentPlayer] = places[currentPlayer] - BoardSize;
-		}
-
-		private void ShowPlayerNewLocaltion()
-		{
-			Console.WriteLine(players[currentPlayer]
-								   + "'s new location is "
-								   + places[currentPlayer]);
-		}
-
-		private void ShowCurrentCategory()
-		{
-			Console.WriteLine("The category is " + CurrentCategory());
 		}
 
 		private static bool IsOdd(int roll)
@@ -144,22 +125,22 @@ namespace Trivia
 		{
 			if (CurrentCategory() == "Pop")
 			{
-				Console.WriteLine(popQuestions.First());
+				this.display.WriteLine(popQuestions.First());
 				popQuestions.RemoveFirst();
 			}
 			if (CurrentCategory() == "Science")
 			{
-				Console.WriteLine(scienceQuestions.First());
+				this.display.WriteLine(scienceQuestions.First());
 				scienceQuestions.RemoveFirst();
 			}
 			if (CurrentCategory() == "Sports")
 			{
-				Console.WriteLine(sportsQuestions.First());
+				this.display.WriteLine(sportsQuestions.First());
 				sportsQuestions.RemoveFirst();
 			}
 			if (CurrentCategory() == "Rock")
 			{
-				Console.WriteLine(rockQuestions.First());
+				this.display.WriteLine(rockQuestions.First());
 				rockQuestions.RemoveFirst();
 			}
 		}
@@ -184,9 +165,9 @@ namespace Trivia
 			{
 				if (isGettingOutOfPenaltyBox)
 				{
-					Console.WriteLine("Answer was correct!!!!");
+					this.display.WriteLine("Answer was correct!!!!");
 					purses[currentPlayer]++;
-					Console.WriteLine(players[currentPlayer]
+					this.display.WriteLine(players[currentPlayer]
 							+ " now has "
 							+ purses[currentPlayer]
 							+ " Gold Coins.");
@@ -204,9 +185,9 @@ namespace Trivia
 			}
 			else
 			{
-				Console.WriteLine("Answer was corrent!!!!");
+				this.display.WriteLine("Answer was corrent!!!!");
 				purses[currentPlayer]++;
-				Console.WriteLine(players[currentPlayer]
+				this.display.WriteLine(players[currentPlayer]
 						+ " now has "
 						+ purses[currentPlayer]
 						+ " Gold Coins.");
@@ -226,8 +207,8 @@ namespace Trivia
 
 		public bool WrongAnswer()
 		{
-			Console.WriteLine("Question was incorrectly answered");
-			Console.WriteLine(players[currentPlayer] + " was sent to the penalty box");
+			this.display.WriteLine("Question was incorrectly answered");
+			this.display.WriteLine(players[currentPlayer] + " was sent to the penalty box");
 			inPenaltyBox[currentPlayer] = true;
 
 			currentPlayer++;
