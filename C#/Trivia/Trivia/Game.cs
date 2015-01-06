@@ -23,9 +23,26 @@ namespace Trivia
 
 		private IDisplay display;
 
+		public Random Rand
+		{
+			get;
+			private set;
+		}
+
+		public const int WrongAnswerId = 7;
+		public const int MinAnswerId = 0;
+		public const int MaxAnswerId = 9;
+
 		public Game(IDisplay display)
 		{
 			this.display = display;
+			this.Rand = new Random(DateTime.Now.Millisecond);
+		}
+
+		public Game(IDisplay display, Random rand)
+		{
+			this.display = display;
+			this.Rand = rand;
 		}
 
 		public bool IsPlayable()
@@ -58,7 +75,13 @@ namespace Trivia
 			}
 		}
 
-		public void roll(int rolledNumber)
+		public void Roll()
+		{
+			int rolledNumber = Rand.Next(5) + 1;
+			this.Roll(rolledNumber);
+		}
+
+		public void Roll(int rolledNumber)
 		{
 			this.display.ShowStatusBeforeRoll(players[currentPlayer], rolledNumber);
 
@@ -153,6 +176,23 @@ namespace Trivia
 
 				return winner;
 			}
+		}
+
+		public bool DidSomeoneWin()
+		{
+			if (!this.IsCurrentAnswerCorrect())
+			{
+				return !this.WrongAnswer();
+			}
+			else
+			{
+				return !this.WasCorrectlyAnswered();
+			}
+		}
+
+		private bool IsCurrentAnswerCorrect(int minAnswerId = MinAnswerId, int maxAnswerId = MaxAnswerId)
+		{
+			return this.Rand.Next(minAnswerId, maxAnswerId) != WrongAnswerId;
 		}
 
 		private void MoveNextPlayer()

@@ -71,7 +71,7 @@ namespace TriviaUnitTest
 			((int[])privateGame.GetField("places"))[currentPlayer] = currentPlace;
 			((List<string>)privateGame.GetField("players")).Add("Player1");
 
-			privateGame.Invoke("roll", new object[] { rollNumber });
+			this.game.Roll(rollNumber);
 
 			Assert.AreEqual(3, ((int[])privateGame.GetField("places"))[currentPlayer], "Player1 is expected at position 3");
 			Assert.AreEqual("Rock", game.CurrentCategory());
@@ -90,7 +90,7 @@ namespace TriviaUnitTest
 			((int[])privateGame.GetField("places"))[currentPlayer] = currentPlace;
 			((List<string>)privateGame.GetField("players")).Add("Player1");
 
-			privateGame.Invoke("roll", new object[] { rollNumber });
+			this.game.Roll(rollNumber);
 
 			Assert.AreEqual(1, ((int[])privateGame.GetField("places"))[currentPlayer], "Player1 is expected at position 1");
 			Assert.AreEqual("Science", game.CurrentCategory());
@@ -104,7 +104,7 @@ namespace TriviaUnitTest
 
 			SetupPlayerInPenaltyBox(privateGame);
 
-			privateGame.Invoke("roll", new object[] { rollNumber });
+			this.game.Roll(rollNumber);
 
 			Assert.IsTrue((bool)privateGame.GetField("isGettingOutOfPenaltyBox"));
 		}
@@ -116,7 +116,7 @@ namespace TriviaUnitTest
 			int rollNumber = 2;
 			SetupPlayerInPenaltyBox(privateGame);
 
-			privateGame.Invoke("roll", new object[] { rollNumber });
+			this.game.Roll(rollNumber);
 
 			Assert.IsFalse((bool)privateGame.GetField("isGettingOutOfPenaltyBox"));
 		}

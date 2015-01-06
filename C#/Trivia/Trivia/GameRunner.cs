@@ -7,53 +7,24 @@ namespace Trivia
 {
 	public class GameRunner : IGameRunner
 	{
-		public Random Rand
-		{
-			get;
-			private set;
-		}
-
-		public const int WrongAnswerId = 7;
-		public const int MinAnswerId = 0;
-		public const int MaxAnswerId = 9;
-
-		private bool notAWinner;
+		private IGame game;
 
 		public GameRunner(int seed)
 		{
-			this.Rand = new Random(seed);
+			Random rand = new Random(seed);
+			game = new Game(new ConsoleDisplay(), rand);
 		}
 
 		public void Run()
 		{
-			Game aGame = new Game(new ConsoleDisplay());
-
-			aGame.AddPlayer("Chet");
-			aGame.AddPlayer("Pat");
-			aGame.AddPlayer("Sue");
+			game.AddPlayer("Chet");
+			game.AddPlayer("Pat");
+			game.AddPlayer("Sue");
 
 			do
 			{
-				int dice = Rand.Next(5) + 1;
-				aGame.roll(dice);
-			} while (!this.DidSomeoneWin(aGame, this.IsCurrentAnswerCorrect()));
-		}
-
-		public bool DidSomeoneWin(IGame aGame, bool isCurrentAnswerCorrect)
-		{
-			if (!isCurrentAnswerCorrect)
-			{
-				return !aGame.WrongAnswer();
-			}
-			else
-			{
-				return !aGame.WasCorrectlyAnswered();
-			}
-		}
-
-		public bool IsCurrentAnswerCorrect(int minAnswerId = MinAnswerId, int maxAnswerId = MaxAnswerId)
-		{
-			return this.Rand.Next(minAnswerId, maxAnswerId) != WrongAnswerId;
+				game.Roll();
+			} while (!game.DidSomeoneWin());
 		}
 
 		public static void Main(String[] args)
