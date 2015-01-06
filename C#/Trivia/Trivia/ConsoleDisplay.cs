@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Trivia
 {
-	internal class Display
+	internal class ConsoleDisplay : IDisplay
 	{
 		LinkedList<string> popQuestions = new LinkedList<string>();
 		LinkedList<string> scienceQuestions = new LinkedList<string>();
@@ -14,7 +14,7 @@ namespace Trivia
 
 		public const int CategorySize = 50;
 
-		public Display()
+		public ConsoleDisplay()
 		{
 			for (int i = 0; i < CategorySize; i++)
 			{

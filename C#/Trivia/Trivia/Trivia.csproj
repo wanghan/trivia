@@ -62,9 +62,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Display.cs" />
+    <Compile Include="ConsoleDisplay.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameRunner.cs" />
+    <Compile Include="IDisplay.cs" />
     <Compile Include="IGame.cs" />
     <Compile Include="IGameRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

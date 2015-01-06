@@ -21,11 +21,11 @@ namespace Trivia
 		public const int BoardSize = 12;
 		public const int NumberOfCoinsToWin = 6;
 
-		private Display display;
+		private IDisplay display;
 
 		public Game()
 		{
-			this.display = new Display();
+			this.display = new ConsoleDisplay();
 		}
 
 		public bool IsPlayable()
