@@ -23,9 +23,9 @@ namespace Trivia
 
 		private IDisplay display;
 
-		public Game()
+		public Game(IDisplay display)
 		{
-			this.display = new ConsoleDisplay();
+			this.display = display;
 		}
 
 		public bool IsPlayable()

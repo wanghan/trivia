@@ -2,7 +2,7 @@
 
 namespace Trivia
 {
-	interface IDisplay
+	public interface IDisplay
 	{
 		void AskQuestion(string currentCategory);
 		void ShowAddPlayerInfo(string playerName, int playerCount);

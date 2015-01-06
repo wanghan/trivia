@@ -13,7 +13,7 @@ namespace TriviaUnitTest
 		[TestInitialize]
 		public void Test_Initialize()
 		{
-			this.game = new Game();
+			this.game = new Game(new DummyDisplay());
 		}
 
 		[TestMethod]

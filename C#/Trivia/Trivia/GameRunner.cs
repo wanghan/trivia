@@ -26,7 +26,7 @@ namespace Trivia
 
 		public void Run()
 		{
-			Game aGame = new Game();
+			Game aGame = new Game(new ConsoleDisplay());
 
 			aGame.AddPlayer("Chet");
 			aGame.AddPlayer("Pat");
